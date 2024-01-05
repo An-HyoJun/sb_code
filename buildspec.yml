@@ -18,6 +18,7 @@ phases:
 artifacts:
   files: 
     - target/springbootApp.jar
+    - appspec.yml
     - start.sh
     - stop.sh
   discard-paths: yes
