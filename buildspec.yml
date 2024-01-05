@@ -1,0 +1,23 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      java: corretto8
+  pre_build:
+    commands:
+      - echo Pre-build completed
+  build:
+    commands:
+      - Build started
+      - mvn clean package
+  post_build:
+    commands:
+      - echo Build completed
+
+artifacts:
+  files: 
+    - target/springbootApp.jar
+    - start.sh
+    - stop.sh
+  discard-paths: yes
