@@ -38,7 +38,7 @@ pipeline {
         }
         stage('Login'){
           steps{
-              sh "docker login -u prehed -p sjhshj1252"
+              sh 'echo $DOCKERHUBCREDENTIAL_PSW | docker login -u $DOCKERHUBCREDENTIAL_USR --password-stdin'
           }
         }
         stage('image build') {
