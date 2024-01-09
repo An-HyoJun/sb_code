@@ -20,14 +20,6 @@ pipeline {
                 userRemoteConfigs: [[credentialsId: GITCREDENTIAL, url: GITWEBADD]]])
             }
         }
-        posts {
-            failure {
-                echo 'Repository clone failure'
-            }
-            success {
-                echo 'Repository clone success'
-            }
-        }
         stage('Test') {
             steps {
                 echo 'Testing..'
@@ -37,6 +29,14 @@ pipeline {
             steps {
                 echo 'Deploying....'
             }
+        }
+    }
+    post {
+        failure {
+            echo 'Repository clone failure'
+        }
+        success {
+            echo 'Repository clone success'
         }
     }
 }
