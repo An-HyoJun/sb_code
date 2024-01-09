@@ -38,7 +38,7 @@ pipeline {
         }
         stage('Login'){
           steps{
-              "docker login -u prehed -p sjhshj1252"
+              sh "docker login -u prehed -p sjhshj1252"
           }
         }
         stage('image build') {
