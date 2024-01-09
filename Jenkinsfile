@@ -44,11 +44,9 @@ pipeline {
         }
         stage('image push') {
             steps {
-                scripts {
-                    docker.withRegistry('', DOCKERHUBCREDENTIAL){
-                        dockerImage.push("${currentBuild.number}")
-                        dockerImage.push("latest")
-                    }
+                docker.withRegistry('', DOCKERHUBCREDENTIAL){
+                    dockerImage.push("${currentBuild.number}")
+                    dockerImage.push("latest")
                 }
             }
             post {
