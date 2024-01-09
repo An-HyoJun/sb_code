@@ -44,11 +44,9 @@ pipeline {
         }
         stage('image push') {
             steps {
-                script {
-                    withRegistry('prehed', $DOCKERHUBCREDENTIAL){
-                        sh ‘docker login -u prehd -p ${DOCKERHUBCREDENTIAL}’
-                        sh 'docker push ${DOCKERHUB}:${currentBuild.number}'
-                    }
+                withDockerRegistry(credentialsId: DOCKERHUBCREDENTIAL, url: '') {
+                    sh "docker push ${DOCKERHUB}:${currentBuild.number}"
+                    sh "docker push ${DOCKERHUB}:latest"
                 }
             }
             post {
