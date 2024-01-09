@@ -36,6 +36,11 @@ pipeline {
                 sh "mvn clean package"
             }
         }
+        stage('Login'){
+          steps{
+              sh 'echo $DOCKERHUBCREDENTIAL | docker login -u prehed --password-stdin'
+          }
+        }
         stage('image build') {
             steps {
                 sh "docker build -t ${DOCKERHUB}:${currentBuild.number} ."
