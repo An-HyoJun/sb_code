@@ -36,11 +36,6 @@ pipeline {
                 sh "mvn clean package"
             }
         }
-        stage('Login'){
-          steps{
-              sh 'echo $DOCKERHUBCREDENTIAL_PSW | docker login -u $DOCKERHUBCREDENTIAL_USR --password-stdin'
-          }
-        }
         stage('image build') {
             steps {
                 sh "docker build -t ${DOCKERHUB}:${currentBuild.number} ."
@@ -49,8 +44,12 @@ pipeline {
         }
         stage('image push') {
             steps {
-                sh "docker push ${DOCKERHUB}:${currentBuild.number}"
-                sh "docker push ${DOCKERHUB}:latest"
+                scripts {
+                    docker.withRegistry('', DOCKERHUBCREDENTIAL){
+                        dockerImage.push("${currentBuild.number}")
+                        dockerImage.push("latest")
+                    }
+                }
             }
             post {
                 failure {
