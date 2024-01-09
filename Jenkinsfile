@@ -44,7 +44,7 @@ pipeline {
         }
         stage('image push') {
             steps {
-                sh docker.withRegistry('', DOCKERHUBCREDENTIAL){
+                sh docker.withRegistry('prehed', DOCKERHUBCREDENTIAL){
                     dockerImage.push("${currentBuild.number}")
                     dockerImage.push("latest")
                 }
