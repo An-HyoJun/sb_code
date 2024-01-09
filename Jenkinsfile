@@ -20,7 +20,7 @@ pipeline {
                 userRemoteConfigs: [[credentialsId: GITCREDENTIAL, url: GITWEBADD]]])
             }
         }
-        post {
+        posts {
             failure {
                 echo 'Repository clone failure'
             }
