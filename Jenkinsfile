@@ -11,6 +11,9 @@ pipeline {
         GITWEBADD = 'https://github.com/An-HyoJun/sb_code.git'
         GITSSHADD = 'git@github.com:An-HyoJun/sb_code.git'
         GITCREDENTIAL = 'git_cre'
+        
+        DOCKERHUB = 'prehed/spring'
+        DOCKERHUBCREDENTIAL = 'docker_cre'
     }
 
     stages {
@@ -35,7 +38,7 @@ pipeline {
         }
         stage('image build') {
             steps {
-                sh "docker build -t prehed/spring:1.0 ."
+                sh "docker build -t DOCKERHUB:${currentBuild.number} ."
             }
         }
     }
